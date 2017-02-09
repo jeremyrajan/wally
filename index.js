@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const ora = require('ora');
 const wallpaper = require('wallpaper');
 const request = require('request').forever();
