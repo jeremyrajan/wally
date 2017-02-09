@@ -7,7 +7,7 @@ Set Full HD desktop backgrounds using Wally service.
 * Open up your terminal/cmd
 * Type in `wally`. 
 
-![](http://res.cloudinary.com/jeremyrajan/image/upload/v1486672629/wally_kpintg.gif)
+![demo](images/wally.gif)
 
 It will talk to wally backend and do the things to set awesome wallpapers for you. So you can set one every day, with 
 just one command :smile: :tada:
