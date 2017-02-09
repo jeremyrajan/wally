@@ -3,9 +3,11 @@ const wallpaper = require('wallpaper');
 const request = require('request').forever();
 const fs = require('fs');
 const path = require('path');
-const get = require('download-file');
+const getImage = require('download-file');
 const randomInt = require('random-int');
-const emoji = require('node-emoji')
+const emoji = require('node-emoji');
+const os = require('os');
+const TMPDIR = os.tmpdir();
 
 const wallpaperFile = `wallpaper_${randomInt(10000)}.jpg`;
 
@@ -34,8 +36,8 @@ const download = (url, dest) => {
   spinner.text = 'Got it, downloading image...';
   spinner.color = 'yellow';
   return new Promise((resolve, reject) => {
-    get(url, {
-      directory: __dirname,
+    getImage(url, {
+      directory: TMPDIR,
       filename: wallpaperFile,
       timeout: 500000
     }, (err) => {
@@ -51,14 +53,14 @@ const setWallpaper = (imagePath) => {
     .catch(err => Promise.reject(err));
 };
 
-const clean = (filePath = path.join(__dirname, wallpaperFile)) => {
+const clean = (filePath = path.join(TMPDIR, wallpaperFile)) => {
   try{
     fs.unlinkSync(filePath);
   } catch(e) {}
 };
 
 contactApi()
-  .then(wallpaperUrl => download(wallpaperUrl, path.join(__dirname, wallpaperFile)))
+  .then(wallpaperUrl => download(wallpaperUrl, path.join(TMPDIR, wallpaperFile)))
   .then((wallpaperPath) => {
     spinner.text = 'Image downloaded, setting wallpaper...';
     spinner.color = 'magenta';

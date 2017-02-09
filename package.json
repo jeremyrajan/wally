@@ -1,10 +1,10 @@
 {
   "name": "wally-desktop-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Set full hd wallpaper using the CLI via Pixabay",
   "main": "index.js",
   "scripts": {
-    "start": "node index"
+    "start": "node index.js"
   },
   "author": "Jeremy Rajan",
   "license": "MIT",
