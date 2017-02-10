@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const ora = require('ora');
 const wallpaper = require('wallpaper');
 const request = require('request').forever();
@@ -46,40 +44,28 @@ const download = (url, dest) => {
     }, (err) => {
       if (err) return reject(err);
       return resolve(dest);
-    })
+    });
   });
-};
-
-const setWallpaper = (imagePath) => {
-  return wallpaper.set(imagePath)
-    .then(() => Promise.resolve())
-    .catch(err => Promise.reject(err));
 };
 
 const clean = (filePath = path.join(TMPDIR, wallpaperFile)) => {
-  try{
+  try {
     fs.unlinkSync(filePath);
-  } catch(e) {}
+  } catch (e) { }
 };
 
-contactApi()
-  .then(wallpaperUrl => download(wallpaperUrl, path.join(TMPDIR, wallpaperFile)))
-  .then((wallpaperPath) => {
-    spinner.text = `${emoji.get('confetti_ball')}  Image downloaded, setting wallpaper...`;
-    spinner.color = 'magenta';
-    return setWallpaper(wallpaperPath);
-  })
-  .then((val) => {
-    spinner.text = `${emoji.get('tada')}  Wallpaper set. Check out your shiny new desktop. `;
-    setTimeout(() => {
-      clean();
-      console.log('\n');
-      console.log(boxen(`${emoji.get('heart')}  All images are powered by pixabay.com  ${emoji.get('heart')} `));
-      process.exit(1);
-    }, 1000); // give it some time to stop.
-  })
-  .catch(err => {
-    console.log(err);
-    process.exit(1);
-  });
+module.exports = {
+  init() {
+    return contactApi()
+      .then(wallpaperUrl => download(wallpaperUrl, path.join(TMPDIR, wallpaperFile)))
+      .then(wallpaperPath => wallpaper.set(wallpaperPath))
+      .then(() => {
+        spinner.text = `${emoji.get('tada')}  Wallpaper set. Check out your shiny new desktop. `;
+        clean();
+        console.log('\n');
+        console.log(boxen(`${emoji.get('heart')}  All images are powered by pixabay.com  ${emoji.get('heart')} `));
+      })
+      .catch(err => err);
+  }
+}
 
