@@ -8,6 +8,7 @@ Set Full HD desktop backgrounds using Wally service.
 * Type in `wally`. 
 
 ![demo](images/wally.gif)
+![demo](http://res.cloudinary.com/jeremyrajan/image/upload/v1486672629/wally_kpintg.gif)
 
 It will talk to wally backend and do the things to set awesome wallpapers for you. So you can set one every day, with 
 just one command :smile: :tada:
