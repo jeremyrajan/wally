@@ -9,11 +9,10 @@ const emoji = require('node-emoji');
 const os = require('os');
 const boxen = require('boxen');
 const TMPDIR = os.tmpdir();
+let spinner;
 
 const wallpaperFile = `wallpaper_${randomInt(10000)}.jpg`;
-
 const requestUrl = 'https://wallpaper-backend.herokuapp.com/hello';
-const spinner = ora(`${emoji.get('zap')}  Contacting Wally Service...`).start();
 
 const contactApi = () => {
   return new Promise((resolve, reject) => {
@@ -56,6 +55,7 @@ const clean = (filePath = path.join(TMPDIR, wallpaperFile)) => {
 
 module.exports = {
   init() {
+    spinner = ora(`${emoji.get('zap')}  Contacting Wally Service...`).start();
     return contactApi()
       .then(wallpaperUrl => download(wallpaperUrl, path.join(TMPDIR, wallpaperFile)))
       .then(wallpaperPath => wallpaper.set(wallpaperPath))
