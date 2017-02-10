@@ -25,16 +25,20 @@ const contactApi = () => {
         return reject(`Incorrect response, ${JSON.stringify(response)}`);
       }
 
-      spinner.text = `${emoji.get('rainbow')}  Got response, processing image...`;
-      spinner.color = 'green';
+      if (spinner) {
+        spinner.text = `${emoji.get('rainbow')}  Got response, processing image...`;
+        spinner.color = 'green';
+      }
       resolve(JSON.parse(body).fullHDURL);
     });
   });
 };
 
 const download = (url, dest) => {
-  spinner.text = `${emoji.get('sparkles')}  Got it, downloading image...`;
-  spinner.color = 'yellow';
+  if (spinner) {
+    spinner.text = `${emoji.get('sparkles')}  Got it, downloading image...`;
+    spinner.color = 'yellow';
+  }
   return new Promise((resolve, reject) => {
     getImage(url, {
       directory: TMPDIR,
@@ -54,13 +58,17 @@ const clean = (filePath = path.join(TMPDIR, wallpaperFile)) => {
 };
 
 module.exports = {
-  init() {
-    spinner = ora(`${emoji.get('zap')}  Contacting Wally Service...`).start();
+  init(hasSpinner = true) {
+    if (hasSpinner) {
+      spinner = ora(`${emoji.get('zap')}  Contacting Wally Service...`).start();
+    }
     return contactApi()
       .then(wallpaperUrl => download(wallpaperUrl, path.join(TMPDIR, wallpaperFile)))
       .then(wallpaperPath => wallpaper.set(wallpaperPath))
       .then(() => {
-        spinner.text = `${emoji.get('tada')}  Wallpaper set. Check out your shiny new desktop. `;
+        if (spinner) {
+          spinner.text = `${emoji.get('tada')}  Wallpaper set. Check out your shiny new desktop. `;
+        }
         clean();
         console.log('\n');
         console.log(boxen(`${emoji.get('heart')}  All images are powered by pixabay.com  ${emoji.get('heart')} `));
