@@ -2,6 +2,12 @@
 
 Set Full HD desktop backgrounds using Wally service.
 
+## Install
+
+```
+npm i -g wally-desktop-cli
+```
+
 ## Usage
 
 * Open up your terminal/cmd
