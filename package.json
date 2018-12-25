@@ -9,13 +9,13 @@
   "author": "Jeremy Rajan",
   "license": "MIT",
   "dependencies": {
-    "boxen": "^1.0.0",
+    "boxen": "^2.1.0",
     "download-file": "^0.1.5",
     "node-emoji": "^1.5.1",
-    "ora": "^1.1.0",
+    "ora": "^3.0.0",
     "random-int": "^1.0.0",
     "request": "^2.79.0",
-    "wallpaper": "^2.3.0"
+    "wallpaper": "^4.1.0"
   },
   "bin": {
     "wally": "./main.js"
