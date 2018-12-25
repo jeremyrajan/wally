@@ -1,5 +1,7 @@
 # Wally Desktop CLI
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/jeremyrajan/wally.svg)](https://greenkeeper.io/)
+
 Set Full HD desktop backgrounds using Wally service.
 
 ## Install
